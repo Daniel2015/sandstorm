@@ -6,7 +6,7 @@
         <h1>Video!</h1>
         
         <sql:query var="result" dataSource="jdbc/sandstorm">
-            SELECT video_url FROM Videos WHERE video_id=3
+            SELECT video_url FROM Videos WHERE video_id=1
         </sql:query>
             <a href="<%=request.getContextPath()%>">Index</a>
 <iframe width="420" height="315" src="${result.rows[0].video_url}" 
