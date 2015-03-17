@@ -137,7 +137,8 @@ public class UserBean {
         }
         return user;
     }
-        public List<User> getUsers() {
+
+    public List<User> getUsers() {
         List<User> list = new ArrayList<>();
         Connection con = null;
         Statement stmt = null;
@@ -170,5 +171,41 @@ public class UserBean {
             }
         }
         return list;
+    }
+
+    public User authentication(User u) {
+         User user = null;
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+            pstmt = con.prepareStatement("SELECT * FROM Users WHERE username=? and password=?");
+            pstmt.setString(1, u.getUsername());
+            pstmt.setString(2, u.getPassword());
+            ResultSet rs = pstmt.executeQuery();
+           
+            if (rs != null && rs.next()) {
+                user = new User();
+                user.setUserId(rs.getInt(1));
+                user.setUsername(rs.getString(2));
+                user.setFirstName(rs.getString(3));
+                user.setLastName(rs.getString(4));
+                user.setPassword(rs.getString(5));
+            } 
+        } catch (SQLException | ClassNotFoundException ex) {
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return user;
     }
 }

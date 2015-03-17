@@ -1,7 +1,7 @@
 <div class="container" style="width: 50%; align:center; padding: 20px;">
     <div class="jumbotron">
         <h2>Login in Sandstorm</h2>
-        <form id="login" name="login" action="loginUser" method="post">
+        <form id="login" name="login" action="authenticationUser" method="post">
             <paper-input-decorator floatingLabel label="Username" autovalidate>
                 <input type="text" id="username" name="username" is="core-input" maxlength="30" required>
 

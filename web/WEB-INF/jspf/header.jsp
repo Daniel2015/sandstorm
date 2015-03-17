@@ -15,7 +15,7 @@
         <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
         <link rel="import" href="bower_components/paper-elements/paper-elements.html">
         <link rel="import" href="bower_components/core-elements/core-elements.html">
-             <link rel="import" href="bower_components/paper-input/paper-char-counter.html">
+        <link rel="import" href="bower_components/paper-input/paper-char-counter.html">
         <!-- angularJS 1.3.14 -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 
@@ -30,7 +30,6 @@
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        <script src="js/controller.js"></script>
 
         <link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -48,24 +47,41 @@
     <core-drawer-panel id="drawerPanel">
         <core-header-panel id="side_header" navigation style="background-color: #534f4f; opacity: 0.90;" drawer>
             <core-toolbar style="background-color: #56BA89;">Sandstorm</core-toolbar>
+
+            <%          if (session.getAttribute("username") != null) {%>
+
+            <div style="color:white;">
+                <h3>Hello, <%=session.getAttribute("first_name")%> <%=session.getAttribute("first_name")%>
+                </h3>
+            </div>
+            <div><paper-button style=" color: white; width:100%;"
+                               onclick="location.href = '<%=request.getContextPath()%>/logoutUser'" >
+                    Logout</paper-button>
+            </div>
+                    
+            <% } else {%>
+            
             <div><paper-button
-                               <c:choose><c:when test="${pageContext.request.requestURI.endsWith('/Login.jsp')}">
-                                       style=" color: red; width:100%;"
-                                   </c:when><c:otherwise>
-                                       style=" color: white; width:100%;"
-                                   </c:otherwise></c:choose> 
-                               onclick="location.href = '<%=request.getContextPath()%>/Login'" >
+                    <c:choose><c:when test="${pageContext.request.requestURI.endsWith('/Login.jsp')}">
+                            style=" color: red; width:100%;"
+                        </c:when><c:otherwise>
+                            style=" color: white; width:100%;"
+                        </c:otherwise></c:choose> 
+                    onclick="location.href = '<%=request.getContextPath()%>/Login'" >
                     Login</paper-button>
             </div>
             <div><paper-button
-                               <c:choose><c:when test="${pageContext.request.requestURI.endsWith('/Register.jsp')}">
-                                       style=" color: red; width:100%;"
-                                   </c:when><c:otherwise>
-                                       style=" color: white; width:100%;"
-                                   </c:otherwise></c:choose> 
-                               onclick="location.href = '<%=request.getContextPath()%>/Register'" >
+                    <c:choose><c:when test="${pageContext.request.requestURI.endsWith('/Register.jsp')}">
+                            style=" color: red; width:100%;"
+                        </c:when><c:otherwise>
+                            style=" color: white; width:100%;"
+                        </c:otherwise></c:choose> 
+                    onclick="location.href = '<%=request.getContextPath()%>/Register'" >
                     Register</paper-button>
             </div>
+                    
+            <% }%>
+
         </core-header-panel>
         <core-header-panel main flex mode="seaded">
             <core-toolbar id="main_header">
