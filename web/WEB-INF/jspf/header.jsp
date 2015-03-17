@@ -30,12 +30,13 @@
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="js/controller.js"></script>
 
         <link rel="stylesheet" type="text/css" href="css/main.css">
 
         <script>
             document.addEventListener('polymer-ready', function () {
-                var navicon = document.getElementById('menu_toggle');
+                var navicon = document.getElementById('navicon');
                 var drawerPanel = document.getElementById('drawerPanel');
                 navicon.addEventListener('click', function () {
                     drawerPanel.togglePanel();
