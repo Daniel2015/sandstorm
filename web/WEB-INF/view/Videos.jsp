@@ -1,14 +1,15 @@
-<%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-
-        <h1>Video!</h1>
-        
-        <sql:query var="result" dataSource="jdbc/sandstorm">
-            SELECT video_url FROM Videos WHERE video_id=1
-        </sql:query>
-            <a href="<%=request.getContextPath()%>">Index</a>
-<iframe width="420" height="315" src="${result.rows[0].video_url}" 
-        allowfullscreen></iframe>
-
+<sql:query var="songs" dataSource="jdbc/sandstorm">
+    SELECT * FROM Songs
+</sql:query>
+<c:forEach var="song" items="${songs.rows}">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">${song.song_name} <em>by</em> <a href="song?${song.song_id}">${song.song_artist}</a></h3>
+        </div>
+        <div>
+            <audio controls>
+                <source src="<%=request.getContextPath()%>/songs/${song.song_name}.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+</c:forEach>

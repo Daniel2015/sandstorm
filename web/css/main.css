@@ -1,0 +1,46 @@
+body {
+    padding-bottom: 0px;
+    padding-top: 0px;
+    height: 100%;
+    margin: 0;
+}
+core-header-panel {
+    height: 48px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+core-toolbar {
+    height: 48px;
+    background: black;
+}
+paper-tab::shadow #ink {
+    color: #00ffff;
+}
+paper-tabs::shadow #selectionBar {
+    background-color: #00ffff;
+}
+paper-tabs {
+    color: #ffffff;
+    font-weight: bold;
+}
+core-toolbar::shadow .toolbar-tools {
+    background: black;
+    padding: 0px;
+    height: 48px;
+    margin: 0px;
+}
+core-toolbar::shadow ::content {
+    margin: 0px;
+}
+#menu_toggle {
+    color: #00ffff;
+}
+#menu_toggle::shadow #ripple {
+    color: #00ffff;
+}
+paper-input-decorator /deep/ .focused-underline {
+    background-color: green;
+}
+paper-input-decorator /deep/ .unfocused-underline {
+    background-color: green;
+}

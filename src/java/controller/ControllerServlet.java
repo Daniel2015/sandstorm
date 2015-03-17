@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Daniel
  */
-@WebServlet(name = "ControllerServlet", loadOnStartup = 1, urlPatterns = {"/Videos", "/Login","/Register", "/addVideo", "/removeVideo", "/viewCart"})
+@WebServlet(name = "ControllerServlet", loadOnStartup = 1, urlPatterns = {"/Videos", "/Login","/Register", "/addVideo", "/removeVideo", "/viewCart", "/updateUserView"})
 public class ControllerServlet extends HttpServlet {
 
     /**
@@ -60,6 +60,10 @@ public class ControllerServlet extends HttpServlet {
 
         }
         else if (userPath.equals("/Register")) {
+            // TODO: Implement cart page request
+
+
+        }else if (userPath.equals("/updateUserView")) {
             // TODO: Implement cart page request
 
 
