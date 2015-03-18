@@ -18,7 +18,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author Daniel
  */
-@WebServlet(name = "ControllerServlet", loadOnStartup = 1, urlPatterns = {"/Videos", "/Login", "/Register", "/addVideo", "/removeVideo", "/viewCart", "/updateUserView"})
+@WebServlet(name = "ControllerServlet", loadOnStartup = 1, urlPatterns = 
+        {"/Account", "/Videos", "/Login", "/Register", 
+            "/addVideo", "/removeVideo", "/viewCart", "/updateUserView"})
 public class ControllerServlet extends HttpServlet {
 
     /**
@@ -60,6 +62,11 @@ public class ControllerServlet extends HttpServlet {
         } else if (userPath.equals("/Login")) {
             if (session.getAttribute("username") != null) {
                 response.sendRedirect(request.getContextPath());
+            }
+
+        } else if (userPath.equals("/Account")) {
+            if (session.getAttribute("username") == null) {
+                response.sendRedirect("Login");
             }
 
         } else if (userPath.equals("/Register")) {

@@ -44,3 +44,12 @@ paper-input-decorator /deep/ .focused-underline {
 paper-input-decorator /deep/ .unfocused-underline {
     background-color: green;
 }
+.container{
+    width: 50%; align:center; padding: 20px;
+}
+@media screen and (max-width: 1024px)
+{
+    .container {
+        width: 100%; align:center; padding: 20px;
+    }
+}

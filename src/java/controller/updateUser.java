@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.User;
 import model.UserBean;
 
@@ -36,7 +37,12 @@ public class updateUser extends HttpServlet {
         user.setPassword(request.getParameter("password"));
         UserBean ub = new UserBean();
         ub.update(user);
-        response.sendRedirect("Register");
+        HttpSession session = request.getSession();
+        session.setAttribute("user_id", user.getUserId());
+        session.setAttribute("first_name", user.getFirstName());
+        session.setAttribute("last_name", user.getLastName());
+        session.setAttribute("username", user.getUsername());
+        response.sendRedirect(request.getContextPath());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

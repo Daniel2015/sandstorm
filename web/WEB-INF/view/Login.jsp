@@ -1,4 +1,4 @@
-<div class="container" style="width: 50%; align:center; padding: 20px;">
+<div class="container">
     <div class="jumbotron">
         <h2>Login in Sandstorm</h2>
         <form id="login" name="login" action="authenticationUser" method="post">

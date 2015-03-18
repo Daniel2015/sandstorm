@@ -1,4 +1,4 @@
-<div class="container" style="width: 50%; align:center; padding: 20px;">
+<div class="container">
     <div class="jumbotron">
         <h2>Create a new account</h2>
         <form id="register" name="register" action="registerUser" method="post">

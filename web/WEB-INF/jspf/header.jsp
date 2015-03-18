@@ -51,16 +51,19 @@
             <%          if (session.getAttribute("username") != null) {%>
 
             <div style="color:white;">
-                <h3>Hello, <%=session.getAttribute("first_name")%> <%=session.getAttribute("first_name")%>
+                <h3>Hello, <%=session.getAttribute("first_name")%> <%=session.getAttribute("last_name")%>
                 </h3>
             </div>
             <div><paper-button style=" color: white; width:100%;"
                                onclick="location.href = '<%=request.getContextPath()%>/logoutUser'" >
                     Logout</paper-button>
             </div>
-                    
+            <div><paper-button style=" color: white; width:100%;"
+                               onclick="location.href = '<%=request.getContextPath()%>/Account'" >
+                    My Account</paper-button>
+            </div>        
             <% } else {%>
-            
+
             <div><paper-button
                     <c:choose><c:when test="${pageContext.request.requestURI.endsWith('/Login.jsp')}">
                             style=" color: red; width:100%;"
@@ -79,7 +82,7 @@
                     onclick="location.href = '<%=request.getContextPath()%>/Register'" >
                     Register</paper-button>
             </div>
-                    
+
             <% }%>
 
         </core-header-panel>
