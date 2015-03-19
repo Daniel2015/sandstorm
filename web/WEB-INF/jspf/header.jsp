@@ -9,8 +9,9 @@
 <!DOCTYPE html>
 <html ng-app="phonecatApp">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Sandstorm</title>
 
         <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
         <link rel="import" href="bower_components/paper-elements/paper-elements.html">
@@ -61,7 +62,7 @@
             <div><paper-button style=" color: white; width:100%;"
                                onclick="location.href = '<%=request.getContextPath()%>/Account'" >
                     My Account</paper-button>
-            </div>        
+            </div>
             <% } else {%>
 
             <div><paper-button
@@ -84,6 +85,44 @@
             </div>
 
             <% }%>
+            <script>
+                $(function () {
+                    $(document.body).on('click', "a[rel='tab']", function (e) {
+//e.preventDefault();
+                        /*
+                         if uncomment the above line, html5 nonsupported browers won't change the url but will display the ajax content;
+                         if commented, html5 nonsupported browers will reload the page to the specified link.
+                         */
+
+//get the link location that was clicked
+                        pageurl = $(this).attr('href');
+
+//to get the ajax content and display in div with id 'content'
+                        $.ajax({url: pageurl + '?rel=tab', success: function (data) {
+                                $('#content').html(data);
+                            }});
+
+//to change the browser URL to the given link location
+                        if (pageurl != window.location) {
+                            window.history.pushState({path: pageurl}, '', pageurl);
+                        }
+//stop refreshing to the page given in
+                        return false;
+                    });
+                });
+                $(window).bind('popstate', function () {
+                    $.ajax({url: location.pathname + '?rel=tab', success: function (data) {
+                            $('#content').html(data);
+                        }});
+                });
+            </script>
+            <a href="Login" rel="tab">menu1</a> |
+            <a href="Register" rel="tab">menu2</a> |
+            <a href="Account" rel="tab">menu3</a>
+
+            <audio controls>
+                <source src="<%=request.getContextPath()%>/songs/foo.mp3" type="audio/mpeg">
+            </audio>
 
         </core-header-panel>
         <core-header-panel main flex mode="seaded">
@@ -97,4 +136,4 @@
                 </paper-tabs>
                 <paper-icon-button id="menu_toggle" icon="menu" core-drawer-toggle></paper-icon-button>
             </core-toolbar>
-            <div fit>
+            <div id="content" fit>

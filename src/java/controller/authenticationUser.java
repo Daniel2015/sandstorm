@@ -47,9 +47,9 @@ public class authenticationUser extends HttpServlet {
             session.setAttribute("username", user.getUsername());
             session.setAttribute("first_name", user.getFirstName());
             session.setAttribute("last_name", user.getLastName());
-            response.sendRedirect("Videos");
+            response.sendRedirect(request.getContextPath());
         } else {
-            response.sendRedirect("Login");
+            response.sendRedirect(request.getContextPath());
         }
     }
 

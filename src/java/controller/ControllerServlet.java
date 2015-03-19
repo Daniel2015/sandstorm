@@ -20,7 +20,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "ControllerServlet", loadOnStartup = 1, urlPatterns = 
         {"/Account", "/Videos", "/Login", "/Register", 
-            "/addVideo", "/removeVideo", "/viewCart", "/updateUserView"})
+            "/addVideo", "/removeVideo", "/viewCart", "/updateUserView",
+        "/Music", "/Radio", "/Playlists"})
 public class ControllerServlet extends HttpServlet {
 
     /**

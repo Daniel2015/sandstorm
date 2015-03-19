@@ -1,3 +1,7 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.User"%>
+<%@page import="model.UserBean"%>
+
 <%
     Integer userid = (Integer) session.getAttribute("user_id");
     UserBean ub = new UserBean();

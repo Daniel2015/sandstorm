@@ -1,3 +1,7 @@
+<%@page import="java.util.List"%>
+<%@page import="model.User"%>
+<%@page import="model.UserBean"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="container">
     <div class="jumbotron">
         <h2>Create a new account</h2>

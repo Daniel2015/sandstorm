@@ -35,7 +35,7 @@ public class registerUser extends HttpServlet {
         user.setUsername(request.getParameter("username"));
         UserBean ub = new UserBean();
         ub.addNew(user);
-        response.sendRedirect("Login");
+        response.sendRedirect(request.getContextPath());
  
     }
 
