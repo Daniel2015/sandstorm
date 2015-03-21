@@ -46,7 +46,7 @@
                         pageurl = $(this).attr('href');
 
 //to get the ajax content and display in div with id 'content'
-                        $.ajax({url: pageurl + '?rel=tab', success: function (data) {
+                        $.ajax({url: pageurl + '?rel=tab',contentType: "text/plain; charset=UTF-8", success: function (data) {
                                 $('#content').html(data);
                             }});
 
@@ -68,7 +68,7 @@
                         pageurl = $(this).attr('href');
 
 //to get the ajax content and display in div with id 'content'
-                        $.ajax({url: pageurl + '?rel=tab', success: function (data) {
+                        $.ajax({url: pageurl + '?rel=tab',contentType: "text/plain; charset=UTF-8", success: function (data) {
                                 $('#content').html(data);
                             }});
 
@@ -100,11 +100,11 @@
                 <h3>Hello, <%=session.getAttribute("first_name")%> <%=session.getAttribute("last_name")%>
                 </h3>
             </div>
-            <div><paper-button style=" color: white; width:100%;"
+            <div><paper-button style=" color: white; width:100%; margin:0 0px;"
                                onclick="location.href = '<%=request.getContextPath()%>/logoutUser'" >
                     Logout</paper-button>
             </div>
-            <div><paper-button style=" color: white; width:100%;"
+            <div><paper-button style=" color: white; width:100%; margin:0 0px;"
                                href="Account" rel="tab">
                     My Account</paper-button>
             </div>
@@ -112,18 +112,18 @@
 
             <div><paper-button
                     <c:choose><c:when test="${pageContext.request.requestURI.endsWith('/Login.jsp')}">
-                            style=" color: red; width:100%;"
+                            style=" color: red; width:100%; margin:0 0px;"
                         </c:when><c:otherwise>
-                            style=" color: white; width:100%;"
+                            style=" color: white; width:100%; margin:0 0px;"
                         </c:otherwise></c:choose> 
                     href="Login" rel="tab" >
                     Login</paper-button>
             </div>
             <div><paper-button
                     <c:choose><c:when test="${pageContext.request.requestURI.endsWith('/Register.jsp')}">
-                            style=" color: red; width:100%;"
+                            style=" color: red; width:100%; margin:0 0px;"
                         </c:when><c:otherwise>
-                            style=" color: white; width:100%;"
+                            style=" color: white; width:100%; margin:0 0px;"
                         </c:otherwise></c:choose> 
                     href="Register" rel="tab">
                     Register</paper-button>
@@ -141,7 +141,7 @@
    
         <core-header-panel main flex mode="seaded">
             <core-toolbar id="main_header">
-                <paper-tabs selected="0" style="display: inline-block; width: 100%;">
+                <paper-tabs selected="0" style="display: inline-block; width: 100%; margin:0 0px;">
                     
                     <paper-tab <% if (session.getAttribute("username") == null) {%> href="Login"<% }else{ %> href="Music" <% } %>rel="tab">Music</paper-tab>
                     <paper-tab <% if (session.getAttribute("username") == null) {%> href="Login"<% }else{ %> href="Radio" <% } %>rel="tab">Radio </paper-tab>

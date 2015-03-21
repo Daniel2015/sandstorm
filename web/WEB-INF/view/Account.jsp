@@ -1,4 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.User"%>
 <%@page import="model.UserBean"%>
 

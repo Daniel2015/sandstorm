@@ -1,10 +1,4 @@
 {
-  "name": "sandstorm",
-  "version": "0.0.0",
-  "homepage": "https://github.com/Daniel2015/sandstorm",
-  "authors": [
-    "Daniel2015"
-  ],
   "license": "MIT",
   "ignore": [
     "**/.*",
