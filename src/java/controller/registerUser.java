@@ -28,6 +28,7 @@ public class registerUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         User user = new User();
         user.setFirstName(request.getParameter("first_name"));
         user.setLastName(request.getParameter("last_name"));

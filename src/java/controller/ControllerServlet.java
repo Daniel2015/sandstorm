@@ -21,7 +21,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "ControllerServlet", loadOnStartup = 1, urlPatterns = 
         {"/Account", "/Videos", "/Login", "/Register", 
             "/addVideo", "/removeVideo", "/viewCart", "/updateUserView",
-        "/Music", "/Radio", "/Playlists"})
+        "/Music", "/Radio", "/Playlists",
+        "/Profile", "/Users", "/Home"})
 public class ControllerServlet extends HttpServlet {
 
     /**

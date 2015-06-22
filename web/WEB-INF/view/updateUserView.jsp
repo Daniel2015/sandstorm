@@ -1,3 +1,5 @@
+<%@page import="model.User"%>
+<%@page import="model.UserBean"%>
 <%
     int id = Integer.parseInt(request.getParameter("updateId"));
     UserBean ub = new UserBean();

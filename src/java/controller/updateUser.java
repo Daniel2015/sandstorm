@@ -29,6 +29,7 @@ public class updateUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         User user = new User();
         user.setUserId(Integer.parseInt(request.getParameter("userId")));
         user.setUsername(request.getParameter("username"));

@@ -2,6 +2,7 @@
 <%@page import="model.UserBean"%>
 
 <%
+    response.setCharacterEncoding("UTF-8");
     Integer userid = (Integer) session.getAttribute("user_id");
     UserBean ub = new UserBean();
     User u = ub.getUser(userid);
