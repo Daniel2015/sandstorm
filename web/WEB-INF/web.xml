@@ -5,12 +5,19 @@
         <param-name>imagesPath</param-name>
         <param-value>img/</param-value>
     </context-param>
+    <servlet>
+        <servlet-name>FileUploadServlet</servlet-name>
+        <servlet-class>controller.FileUploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FileUploadServlet</servlet-name>
+        <url-pattern>/FileUploadServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-
     <resource-ref>
         <description>Connects to database for sandstorm application</description>
         <res-ref-name>jdbc/sandstorm</res-ref-name>

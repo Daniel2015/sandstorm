@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
         {"/Account", "/Videos", "/Login", "/Register", 
             "/addVideo", "/removeVideo", "/viewCart", "/updateUserView",
         "/Music", "/Radio", "/Playlists",
-        "/Profile", "/Users", "/Home"})
+        "/Profile", "/Users", "/Home", "/Upload"})
 public class ControllerServlet extends HttpServlet {
 
     /**

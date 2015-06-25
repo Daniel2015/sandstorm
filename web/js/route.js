@@ -40,6 +40,10 @@ sandstormApp.config(function ($routeProvider) {
             .when('/Playlists', {
                 templateUrl: 'Playlists',
                 controller: 'contactController'
+            })
+            .when('/Upload', {
+                templateUrl: 'Upload',
+                controller: 'contactController'
             });
 
 
