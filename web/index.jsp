@@ -36,6 +36,7 @@
         <script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
         <script type="text/javascript" src="js/jplayer.playlist.min.js"
         <script type="text/javascript" src="js/jPlayerInit.js"></script>
+         
 
         </head>
         <body fullbleed vertical layout ng-controller="mainController">
