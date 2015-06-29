@@ -3,6 +3,8 @@
 <%@page import="model.User"%>
 <%@page import="model.UserBean"%>
 <div>
+    <div class="panel">
+    <h2>Users</h2>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -59,3 +61,4 @@
         </tbody>
     </table>
 </div>
+        </div>

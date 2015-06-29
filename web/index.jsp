@@ -1,3 +1,6 @@
+<%@page import="com.google.gson.Gson"%>
+<%@page import="model.SongBean.songView"%>
+<%@page import="model.SongBean"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
@@ -22,23 +25,22 @@
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-route/angular-route.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/slide.css">
-  <!-- Radio js -->
-        <script type="text/javascript" src="js/coverflow-slideshow.js"></script>
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <!-- Radio js -->
+    <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
 
         <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 
         <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="css/main.css">
+
         <script src="js/route.js"></script>
         <script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
         <script type="text/javascript" src="js/jplayer.playlist.min.js"
         <script type="text/javascript" src="js/jPlayerInit.js"></script>
-
+            <link rel="stylesheet" type="text/css" href="css/main.css">
         </head>
         <body fullbleed vertical layout ng-controller="mainController">
         <core-drawer-panel id="drawerPanel">
@@ -61,92 +63,41 @@
                                    onclick="location.href = '<%=request.getContextPath()%>/#/Account'">
                         My Account</paper-button>
                 </div>
-                <div><paper-button style=" color: white; width:100%; margin:0 0px;"
-                                   onclick="location.href = '<%=request.getContextPath()%>/#/Profile'">
-                        Profile</paper-button>
+                <%--   <div><paper-button style=" color: white; width:100%; margin:0 0px;"
+                onclick="location.href = '<%=request.getContextPath()%>/#/Profile'">
+Profile</paper-button> --%>
                 </div>
                 <div><paper-button style=" color: white; width:100%; margin:0 0px;"
                                    onclick="location.href = '<%=request.getContextPath()%>/#/Upload'">
                         Upload Music</paper-button>
                 </div>
-                <% } else {%>
-
-                <div><paper-button
-                        <c:choose><c:when test="${pageContext.request.requestURI.endsWith('/Login.jsp')}">
-                                style=" color: red; width:100%; margin:0 0px;"
-                            </c:when><c:otherwise>
-                                style=" color: white; width:100%; margin:0 0px;"
-                            </c:otherwise></c:choose> 
-                        onclick="location.href = '<%=request.getContextPath()%>/#/Login'">
-                        Login</paper-button>
-                </div>
-                <div><paper-button
-                        <c:choose><c:when test="${pageContext.request.requestURI.endsWith('/Register.jsp')}">
-                                style=" color: red; width:100%; margin:0 0px;"
-                            </c:when><c:otherwise>
-                                style=" color: white; width:100%; margin:0 0px;"
-                            </c:otherwise></c:choose> 
-                        onclick="location.href = '<%=request.getContextPath()%>/#/Register'">
-                        Register</paper-button>
-                </div>
-
-                <% }%>
+                           <%
+                    Integer userid = (Integer) request.getSession().getAttribute("user_id");
+                    SongBean p = new SongBean();
+                    List<songView> jsonPlaylist = p.getPlaylist(userid);
+                    String json = new Gson().toJson(jsonPlaylist);%> 
                 <script>
 
-                            //<![CDATA[
-                            $(document).ready(function () {
+                    //<![CDATA[
+                    $(document).ready(function () {
 
-                                new jPlayerPlaylist({
-                                    jPlayer: "#jquery_jplayer_1",
-                                    cssSelectorAncestor: "#jp_container_1"
-                                }, [
-                                    {
-                                        title: "Bubble",
-                                        mp3: "songs/foo.mp3"
-                                    },
-                                    {
-                                        title: "Bubbles",
-                                        mp3: "songs/foo2.mp3"
-                                    },
-                                    {
-                                        title: "Bubbles",
-                                        mp3: "songs/foo3.mp3"
-                                    },
-                                    {
-                                        title: "Bubbles",
-                                        mp3: "songs/foo4.mp3"
-                                    },
-                                    {
-                                        title: "Bubbles",
-                                        mp3: "songs/foo5.mp3"
-                                    },
-                                    {
-                                        title: "Bubbles",
-                                        mp3: "songs/foo6.mp3"
-                                    },
-                                    {
-                                        title: "Bubbles",
-                                        mp3: "songs/foo7.mp3"
-                                    },
-                                    {
-                                        title: "Bubbles",
-                                        mp3: "songs/foo8.mp3"
-                                    },
-                                    {
-                                        title: "Bubbles",
-                                        mp3: "songs/foo9.mp3"
-                                    }
-                                ], {
-                                    swfPath: "/js",
-                                    supplied: "mp3",
-                                    wmode: "window",
-                                    useStateClassSkin: true,
-                                    autoBlur: false,
-                                    smoothPlayBar: true,
-                                    keyEnabled: true
-                                });
-                            });
-                            //]]>
+                        new jPlayerPlaylist({
+                            jPlayer: "#jquery_jplayer_1",
+                            cssSelectorAncestor: "#jp_container_1"
+                        }, 
+              
+                     <%=json%>                
+                        , {
+                            swfPath: "/js",
+                            supplied: "mp3",
+                            wmode: "window",
+                            useStateClassSkin: true,
+                            autoBlur: false,
+                            smoothPlayBar: true,
+                            keyEnabled: true
+                        });
+                    });
+                    //]]>
 
                 </script>
                 <div id="jquery_jplayer_1" class="jp-jplayer"></div>
@@ -191,6 +142,29 @@
                         </div>
                     </div>
                 </div>
+                <% } else {%>
+
+                <div><paper-button
+                        <c:choose><c:when test="${pageContext.request.requestURI.endsWith('/Login.jsp')}">
+                                style=" color: red; width:100%; margin:0 0px;"
+                            </c:when><c:otherwise>
+                                style=" color: white; width:100%; margin:0 0px;"
+                            </c:otherwise></c:choose> 
+                        onclick="location.href = '<%=request.getContextPath()%>/#/Login'">
+                        Login</paper-button>
+                </div>
+                <div><paper-button
+                        <c:choose><c:when test="${pageContext.request.requestURI.endsWith('/Register.jsp')}">
+                                style=" color: red; width:100%; margin:0 0px;"
+                            </c:when><c:otherwise>
+                                style=" color: white; width:100%; margin:0 0px;"
+                            </c:otherwise></c:choose> 
+                        onclick="location.href = '<%=request.getContextPath()%>/#/Register'">
+                        Register</paper-button>
+                </div>
+
+                <% }%>
+                       
 
 
 
@@ -201,10 +175,10 @@
                     <paper-tabs selected="0" style="display: inline-block; width: 100%; margin:0 0px;">
 
                         <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Music'" <% } %>>Music</paper-tab>
-                        <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Radio'" <% } %>>Radio </paper-tab>
-                        <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Playlists'" <% }%>>Playlists</paper-tab>
-                        <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Users'" <% }%>>Users</paper-tab>
-                        <paper-tab>About us</paper-tab>
+                        <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Radio'" <% } %>>Radio </paper-tab> 
+                            <%--                      <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Playlists'" <% }%>>Playlists</paper-tab> --%>
+                        <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Users'" <% }%>>Users</paper-tab> 
+                        <paper-tab onclick="location.href = '<%=request.getContextPath()%>/#/AboutUs'">About us</paper-tab>
                     </paper-tabs>
                     <paper-icon-button id="menu_toggle" icon="menu" core-drawer-toggle></paper-icon-button>
                 </core-toolbar>

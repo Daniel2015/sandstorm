@@ -1,19 +1,41 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-MUSIC
-<sql:query var="songs" dataSource="jdbc/sandstorm">
-    SELECT * FROM Songs
-</sql:query>
-<c:forEach var="song" items="${songs.rows}">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">${song.song_name} <em>by</em> <a href="song?${song.song_id}">${song.song_artist}</a></h3>
-        </div>
-        <div>
-            <audio controls>
-                <source src="<%=request.getContextPath()%>/songs/${song.song_name}.mp3" type="audio/mpeg">
-            </audio>
-        </div>
-    </div>
-</c:forEach>
+
+<div class="panel">
+    <h2>Music</h2>
+    <p>This is the whole set of music files</p>            
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Artist</th>
+                <th>Song</th>
+                <th>Genre</th>
+                <th>Album</th>
+                <th>Year</th>
+                <th>Add to playlist</th>
+            </tr>
+        </thead>
+        <tbody>
+            <sql:query var="result" dataSource="jdbc/sandstorm">
+                SELECT SONG_ID, SONG_NAME, ARTIST_NAME, SONG_GENRE, SONG_ALBUM, SONG_YEAR FROM SONGSET
+            </sql:query>
+            <c:forEach var="row" items="${result.rows}">
+                <tr>
+                    <td><c:out value="${row.SONG_NAME}"/></td>
+                    <td><c:out value="${row.ARTIST_NAME}"/></td>
+                    <td><c:out value="${row.SONG_GENRE}"/></td>
+                    <td><c:out value="${row.SONG_ALBUM}"/></td>
+                    <td><c:out value="${row.SONG_YEAR}"/></td>
+                    <td> <form method="POST" action="PlaylistServlet"  name="addSong">
+
+                            <input type="hidden" id="songID" name="songID" value="<c:out value="${row.SONG_ID}"/>"/> 
+                            <input type="hidden" id="userId" name="userID" value="<%=session.getAttribute("user_id")%>"/>  
+                            <button class="btn btn-success" style="width: 100%;">Add</button>
+                        </form></td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</div>
+

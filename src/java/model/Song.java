@@ -16,6 +16,8 @@ public class Song {
     private String genre;
     private String album;
     private int year;
+    private String fileLocation;
+    private String name;
     
     public int getSongId(){
         return this.song_id;
@@ -63,5 +65,21 @@ public class Song {
     
     public void setYear(int year){
         this.year=year;
+    }
+    
+    public String getFileLocation(){
+        return this.fileLocation;
+    }
+    
+    public void setFileLocation(String fileLocation){
+        this.fileLocation=fileLocation;
+    }
+    
+    public String getName(){
+        return this.name;
+    }
+    
+    public void setName(String name){
+        this.name=name;
     }
 }

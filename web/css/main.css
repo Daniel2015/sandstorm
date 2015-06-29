@@ -3,7 +3,7 @@ body {
     padding-top: 0px;
     height: 100%;
     margin: 0;
-    background:black  url("img/bg.jpg")no-repeat fixed center;
+    background:black  url("../img/bg.jpg")no-repeat fixed center;
     
 }
 core-header-panel {
@@ -54,4 +54,7 @@ paper-input-decorator /deep/ .unfocused-underline {
     .container {
         width: 100%; align:center; padding: 20px;
     }
+}
+span.glyphicon-link {
+    font-size: 0.1em;
 }

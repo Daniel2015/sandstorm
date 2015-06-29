@@ -81,6 +81,8 @@ public class FileUploadServlet extends HttpServlet {
             song.setGenre(request.getParameter("songGenre"));
             song.setAlbum(request.getParameter("songAlbum"));
             song.setYear(Integer.parseInt(request.getParameter("songYear")));
+            song.setFileLocation("songs/" + fileName);
+            song.setName(request.getParameter("artist") + " - " + request.getParameter("songName"));
             SongBean sb = new SongBean();
             sb.add(song);
             response.sendRedirect(request.getContextPath());

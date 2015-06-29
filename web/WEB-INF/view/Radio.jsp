@@ -1,8 +1,9 @@
 
    <link rel="stylesheet" type="text/css" href="css/slide.css">
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript" src="js/coverflow-slideshow.js"></script>
-<div id="jquery-script-menu">
+
+        <div id="jquery-script-menu">
+    
 
 <section>
  

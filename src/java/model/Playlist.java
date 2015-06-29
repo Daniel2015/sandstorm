@@ -12,7 +12,31 @@ package model;
 public class Playlist {
     private int playlistID;
     private String playlistName;
-    private int userID;
+    private int songID;
+    
+     public int getPlaylistID(){
+        return this.playlistID;
+    }
+    
+    public void setPlaylistID(int playlistID){
+        this.playlistID=playlistID;
+    }
+    
+    public String getPlaylistName(){
+        return this.playlistName;
+    }
+    
+    public void setPlaylistName(String playlistName){
+        this.playlistName=playlistName;
+    }
+    
+    public int getSongID(){
+        return this.songID;
+    }
+    
+    public void setSongID(int songID){
+        this.songID=songID;
+    }
     
     
 }
