@@ -3,6 +3,8 @@ body {
     padding-top: 0px;
     height: 100%;
     margin: 0;
+    background:black  url("img/bg.jpg")no-repeat fixed center;
+    
 }
 core-header-panel {
     height: 48px;

@@ -44,6 +44,10 @@ sandstormApp.config(function ($routeProvider) {
             .when('/Upload', {
                 templateUrl: 'Upload',
                 controller: 'mainController'
+            })
+            .when('/AboutUs', {
+                templateUrl: 'AboutUs',
+                controller: 'mainController'
             });
 
 
