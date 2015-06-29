@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import model.Song;
+import model.SongBean;
 
 /**
  *
@@ -44,7 +46,9 @@ public class FileUploadServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+//        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
         final String path = "C:\\Users\\Daniel\\Documents\\NetBeansProjects\\sandstorm\\web\\songs";
         final String songName = request.getParameter("songName");
         final String artist = request.getParameter("artist");
@@ -71,9 +75,16 @@ public class FileUploadServlet extends HttpServlet {
             while ((read = filecontent.read(bytes)) != -1) {
                 out.write(bytes, 0, read);
             }
-            writer.println("New file " + fileName + " created at " + path);
-            LOGGER.log(Level.INFO, "File{0}being uploaded to {1}",
-                    new Object[]{fileName, path});
+            Song song = new Song();
+            song.setArtist(request.getParameter("artist"));
+            song.setSongName(request.getParameter("songName"));
+            song.setGenre(request.getParameter("songGenre"));
+            song.setAlbum(request.getParameter("songAlbum"));
+            song.setYear(Integer.parseInt(request.getParameter("songYear")));
+            SongBean sb = new SongBean();
+            sb.add(song);
+            response.sendRedirect(request.getContextPath());
+
         } catch (FileNotFoundException fne) {
             writer.println("You either did not specify a file to upload or are "
                     + "trying to upload a file to a protected or nonexistent "
@@ -83,6 +94,7 @@ public class FileUploadServlet extends HttpServlet {
             LOGGER.log(Level.SEVERE, "Problems during file upload. Error: {0}",
                     new Object[]{fne.getMessage()});
         } finally {
+
             if (out != null) {
                 out.close();
             }

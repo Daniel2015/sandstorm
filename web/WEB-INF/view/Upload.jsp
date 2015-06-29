@@ -1,3 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <style>
     .btn-file {
         position: relative;
@@ -28,10 +30,40 @@
             </span>
             <paper-input-decorator floatingLabel label="Artist" autovalidate>
                 <input type="text" id="artist" name="artist" is="core-input" maxlength="30" required>
-
             </paper-input-decorator>
+            <%--           
+                   <sql:query var="result" dataSource="jdbc/sandstorm">
+                          SELECT artist_name, artist_id FROM artists
+                      </sql:query>
+                      <select class="form-control" name="artist">
+                          <c:forEach var="row" items="${result.rows}">
+                              <option value="<c:out value="${row.artist_id}"/>"><c:out value="${row.artist_name}"/></option>
+                          </c:forEach>
+                      </select>
+                      <sql:query var="results" dataSource="jdbc/sandstorm">
+                          SELECT genre_id, genre_name FROM genres
+                      </sql:query>
+                      <select class="form-control" name="genre">
+                          <c:forEach var="row" items="${results.rows}">
+                              <option value="<c:out value="${row.genre_id}"/>"><c:out value="${row.genre_name}"/></option>
+                          </c:forEach>
+                      </select>
+            --%>    
+
             <paper-input-decorator floatingLabel label="Song name" autovalidate>
                 <input type="text" id="songName" name="songName" is="core-input" maxlength="30" required>
+
+            </paper-input-decorator>
+            <paper-input-decorator floatingLabel label="Genre" autovalidate>
+                <input type="text" id="songGenre" name="songGenre" is="core-input" maxlength="30" required>
+
+            </paper-input-decorator>
+            <paper-input-decorator floatingLabel label="Album" autovalidate>
+                <input type="text" id="songAlbum" name="songAlbum" is="core-input" maxlength="30" required>
+
+            </paper-input-decorator>
+            <paper-input-decorator floatingLabel label="Year" autovalidate>
+                <input type="text" id="songYear" name="songYear" is="core-input" maxlength="30" required>
 
             </paper-input-decorator>
             <input class="btn btn-success" style="width: 100%;" type="submit" value="Upload" name="upload" id="upload" />

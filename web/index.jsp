@@ -21,7 +21,9 @@
         <!-- angularJS 1.3.14 -->
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-route/angular-route.min.js"></script>
-
+        <link rel="stylesheet" type="text/css" href="css/slide.css">
+  <!-- Radio js -->
+        <script type="text/javascript" src="js/coverflow-slideshow.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 

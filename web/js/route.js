@@ -10,40 +10,40 @@ sandstormApp.config(function ($routeProvider) {
 
             .when('/Login', {
                 templateUrl: 'Login',
-                controller: 'aboutController'
+                controller: 'mainController'
             })
 
             .when('/Register', {
                 templateUrl: 'Register',
-                controller: 'contactController'
+                controller: 'mainController'
             })
             .when('/Account', {
                 templateUrl: 'Account',
-                controller: 'contactController'
+                controller: 'mainController'
             })
             .when('/Profile', {
                 templateUrl: 'Profile',
-                controller: 'contactController'
+                controller: 'mainController'
             })
             .when('/Users', {
                 templateUrl: 'Users',
-                controller: 'contactController'
+                controller: 'mainController'
             })
             .when('/Music', {
                 templateUrl: 'Music',
-                controller: 'contactController'
+                controller: 'mainController'
             })
             .when('/Radio', {
                 templateUrl: 'Radio',
-                controller: 'contactController'
+                controller: 'mainController'
             })
             .when('/Playlists', {
                 templateUrl: 'Playlists',
-                controller: 'contactController'
+                controller: 'mainController'
             })
             .when('/Upload', {
                 templateUrl: 'Upload',
-                controller: 'contactController'
+                controller: 'mainController'
             });
 
 
