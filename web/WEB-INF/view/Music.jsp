@@ -1,10 +1,33 @@
+<%@page import="com.google.gson.Gson"%>
+<%@page import="java.util.List"%>
+<%@page import="model.SongBean"%>
+<%@page import="model.Song"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-
+            <%
+                response.setCharacterEncoding("UTF-8");
+                SongBean s = new SongBean();
+                List<Song> list = s.getSongs();
+                String json = new Gson().toJson(list);
+                List<String> asd= s.searchSongs();
+                String jsons = new Gson().toJson(asd);
+              %>
+<script>
+    $(function () {
+        var availableTags = <%=jsons%>;
+        $("#tags").autocomplete({
+            source: availableTags
+        });
+    });
+</script>
 <div class="panel">
     <h2>Music</h2>
-    <p>This is the whole set of music files</p>            
+    <p>This is the whole set of music files</p>  
+    <div>
+        <label for="tags">Tags: </label>
+        <input id="tags">
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -17,24 +40,22 @@
             </tr>
         </thead>
         <tbody>
-            <sql:query var="result" dataSource="jdbc/sandstorm">
-                SELECT SONG_ID, SONG_NAME, ARTIST_NAME, SONG_GENRE, SONG_ALBUM, SONG_YEAR FROM SONGSET
-            </sql:query>
-            <c:forEach var="row" items="${result.rows}">
-                <tr>
-                    <td><c:out value="${row.SONG_NAME}"/></td>
-                    <td><c:out value="${row.ARTIST_NAME}"/></td>
-                    <td><c:out value="${row.SONG_GENRE}"/></td>
-                    <td><c:out value="${row.SONG_ALBUM}"/></td>
-                    <td><c:out value="${row.SONG_YEAR}"/></td>
-                    <td> <form method="POST" action="PlaylistServlet"  name="addSong">
+<%  for (Song song : list) {
+            %>
+            <tr>
+                <td><%=song.getArtist()%></td>
+                <td><%=song.getSongName()%></td>
+                <td><%=song.getGenre()%></td>
+                <td><%=song.getAlbum()%></td>
+                <td><%=song.getYear()%></td>
+                <td> <form method="POST" action="PlaylistServlet"  name="addSong">
 
-                            <input type="hidden" id="songID" name="songID" value="<c:out value="${row.SONG_ID}"/>"/> 
-                            <input type="hidden" id="userId" name="userID" value="<%=session.getAttribute("user_id")%>"/>  
-                            <button class="btn btn-success" style="width: 100%;">Add</button>
-                        </form></td>
-                </tr>
-            </c:forEach>
+                        <input type="hidden" id="songID" name="songID" value="<%=song.getSongId()%>"/> 
+                        <input type="hidden" id="userId" name="userID" value="<%=session.getAttribute("user_id")%>"/>  
+                        <button class="btn btn-success" style="width: 100%;">Add</button>
+                    </form></td>
+            </tr>
+            <% } %>
         </tbody>
     </table>
 </div>

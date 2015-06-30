@@ -26,7 +26,7 @@
         <script src="bower_components/angular-route/angular-route.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/slide.css">
         <!-- Radio js -->
-    <!-- Latest compiled and minified CSS -->
+        <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
 
         <!-- Optional theme -->
@@ -40,6 +40,8 @@
         <script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
         <script type="text/javascript" src="js/jplayer.playlist.min.js"
         <script type="text/javascript" src="js/jPlayerInit.js"></script>
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+            <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
             <link rel="stylesheet" type="text/css" href="css/main.css">
         </head>
         <body fullbleed vertical layout ng-controller="mainController">
@@ -71,11 +73,11 @@ Profile</paper-button> --%>
                                    onclick="location.href = '<%=request.getContextPath()%>/#/Upload'">
                         Upload Music</paper-button>
                 </div>
-                           <%
+                <%
                     Integer userid = (Integer) request.getSession().getAttribute("user_id");
                     SongBean p = new SongBean();
                     List<songView> jsonPlaylist = p.getPlaylist(userid);
-                    String json = new Gson().toJson(jsonPlaylist);%> 
+                               String json = new Gson().toJson(jsonPlaylist);%> 
                 <script>
 
                     //<![CDATA[
@@ -84,9 +86,8 @@ Profile</paper-button> --%>
                         new jPlayerPlaylist({
                             jPlayer: "#jquery_jplayer_1",
                             cssSelectorAncestor: "#jp_container_1"
-                        }, 
-              
-                     <%=json%>                
+                       },
+                    <%=json%>
                         , {
                             swfPath: "/js",
                             supplied: "mp3",
@@ -164,7 +165,7 @@ Profile</paper-button> --%>
                 </div>
 
                 <% }%>
-                       
+
 
 
 

@@ -90,27 +90,95 @@ public class SongBean {
         return list;
     }
 
-        public class songView {
+    public class songView {
 
         private String title;
         private String mp3;
-        
-        public String getTitle(){
+
+        public String getTitle() {
             return this.title;
         }
-        public void setTitle(String title){
-            this.title=title;
+
+        public void setTitle(String title) {
+            this.title = title;
         }
-        
-        public String getMp3(){
+
+        public String getMp3() {
             return this.mp3;
         }
-        
-        public void setMp3(String mp3){
-            this.mp3=mp3;
+
+        public void setMp3(String mp3) {
+            this.mp3 = mp3;
         }
-        
+
     }
+
+    public List<Song> getSongs() {
+        List<Song> list = new ArrayList<>();
+        Connection con = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT SONG_ID, SONG_NAME, ARTIST_NAME, SONG_GENRE, SONG_ALBUM, SONG_YEAR FROM SONGSET ORDER BY SONG_ID");
+            while (rs.next()) {
+                Song song = new Song();
+                song.setSongId(rs.getInt(1));
+                song.setSongName(rs.getString(2));
+                song.setArtist(rs.getString(3));
+                song.setGenre(rs.getString(4));
+                song.setAlbum(rs.getString(5));
+                song.setYear(rs.getInt(6));
+                list.add(song);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+
+            }
+        }
+        return list;
+    }
+
+    public List<String> searchSongs() {
+        List<String> list = new ArrayList<>();
+        Connection con = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT NAME FROM SONGSET ORDER BY SONG_ID");
+            while (rs.next()) {
+                list.add(rs.getString(1));
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+
+            }
+        }
+        return list;
+
+    }
+
     public void delete(int id) {
 
     }
