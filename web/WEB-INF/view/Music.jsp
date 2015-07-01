@@ -106,10 +106,6 @@ th,td{
   color:white
 }
 
-tbody tr:nth-child(even){
-  background:#ECF0F1;
-}
-
 tbody tr:hover{
 background:#BDC3C7;
   color:#FFFFFF;
