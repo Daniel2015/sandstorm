@@ -65,8 +65,8 @@
         <style>
             body{
   font:1.2em normal Arial,sans-serif;
-  color:#34495E;
-  background-color: white;
+  color:white;
+  background-color: black;
 }
 
 h1{
@@ -97,11 +97,13 @@ table{
 
 thead{
   color:white;
+  padding:5px;
 }
 
 th,td{
   text-align:center;
   padding:5px 0;
+  color:white
 }
 
 tbody tr:nth-child(even){
@@ -121,9 +123,7 @@ background:#BDC3C7;
   border:none;
 }
 
-.scrollMore{
-  margin-top:600px;
-}
+
 
 .up{
   cursor:pointer;
@@ -131,6 +131,7 @@ background:#BDC3C7;
 .panel{
     margin-left: 3%;
     margin-right: 3%;
+    background-color: black;
     
     
 }
