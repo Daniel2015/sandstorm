@@ -69,8 +69,45 @@ public class SongBean {
             ResultSet rs = stmt.executeQuery("SELECT * FROM SONGSET INNER JOIN PLAYLISTSONGS ON SONGSET.SONG_ID=PLAYLISTSONGS.SONG_ID WHERE PLAYLISTSONGS.PLAYLIST_ID=" + user_id + " ORDER BY SONGSET.SONG_ID");
             while (rs.next()) {
                 songView song = new songView();
-                song.setTitle(rs.getString("NAME"));
+                song.setTitle(rs.getString("SONG_NAME"));
+                song.setArtist(rs.getString("ARTIST_NAME"));
                 song.setMp3(rs.getString("FILE_LOCATION"));
+                list.add(song);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+
+            }
+        }
+        return list;
+    }
+
+    public List<Song> getPlaylistSongs(int user_id) {
+        List<Song> list = new ArrayList<>();
+        Connection con = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT SONG_ID, SONG_NAME, ARTIST_NAME, SONG_GENRE, SONG_ALBUM, SONG_YEAR FROM SONGSET INNER JOIN PLAYLISTSONGS ON SONGSET.SONG_ID=PLAYLISTSONGS.SONG_ID WHERE PLAYLISTSONGS.PLAYLIST_ID=" + user_id + " ORDER BY SONGSET.SONG_ID");
+            while (rs.next()) {
+                Song song = new Song();
+                song.setSongId(rs.getInt(1));
+                song.setSongName(rs.getString(2));
+                song.setArtist(rs.getString(3));
+                song.setGenre(rs.getString(4));
+                song.setAlbum(rs.getString(5));
+                song.setYear(rs.getInt(6));
                 list.add(song);
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -93,6 +130,7 @@ public class SongBean {
     public class songView {
 
         private String title;
+        private String artist;
         private String mp3;
 
         public String getTitle() {
@@ -101,6 +139,14 @@ public class SongBean {
 
         public void setTitle(String title) {
             this.title = title;
+        }
+
+        public String getArtist() {
+            return this.artist;
+        }
+
+        public void setArtist(String artist) {
+            this.artist = artist;
         }
 
         public String getMp3() {

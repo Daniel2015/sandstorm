@@ -89,6 +89,9 @@ Profile</paper-button> --%>
                        },
                     <%=json%>
                         , {
+                        playlistOptions: {
+                            enableRemoveControls: true
+                        },
                             swfPath: "/js",
                             supplied: "mp3",
                             wmode: "window",
