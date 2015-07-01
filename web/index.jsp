@@ -177,11 +177,11 @@ Profile</paper-button> --%>
             <core-header-panel main flex mode="seaded">
                 <core-toolbar id="main_header">
                     <paper-tabs selected="0" style="display: inline-block; width: 100%; margin:0 0px;">
-
+                        <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/'" <% } %>>Home</paper-tab>
                         <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Music'" <% } %>>Music</paper-tab>
                         <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Radio'" <% } %>>Radio </paper-tab> 
                             <%--                      <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Playlists'" <% }%>>Playlists</paper-tab> --%>
-                        <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Users'" <% }%>>Users</paper-tab> 
+                          <%--  <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Users'" <% }%>>Users</paper-tab>                              --%>
                         <paper-tab onclick="location.href = '<%=request.getContextPath()%>/#/AboutUs'">About us</paper-tab>
                     </paper-tabs>
                     <paper-icon-button id="menu_toggle" icon="menu" core-drawer-toggle></paper-icon-button>

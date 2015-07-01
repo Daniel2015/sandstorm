@@ -67,8 +67,6 @@ body {
 .wave {
   position: absolute;
   
-  margin: ;
-  
   height: 50px;
 }
 .wave span {
