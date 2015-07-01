@@ -29,7 +29,7 @@ import model.SongBean;
  * @author Daniel
  */
 @WebServlet(name = "FileUploadServlet", urlPatterns = {"/upload"})
-@MultipartConfig(location = "C:\\Users\\Daniel\\Documents\\NetBeansProjects\\sandstorm\\web\\tmp")
+@MultipartConfig(location = "C:\\Users\\Shy\\documents\\NetBeansProjects\\sandstorm\\web\\tmp")
 public class FileUploadServlet extends HttpServlet {
 
     private final static Logger LOGGER
@@ -49,7 +49,7 @@ public class FileUploadServlet extends HttpServlet {
 //        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
 
-        final String path = "C:\\Users\\Daniel\\Documents\\NetBeansProjects\\sandstorm\\web\\songs";
+        final String path = "C:\\Users\\Shy\\Documents\\NetBeansProjects\\sandstorm\\web\\songs";
         final String songName = request.getParameter("songName");
         final String artist = request.getParameter("artist");
         final Part filePart = request.getPart("file");
