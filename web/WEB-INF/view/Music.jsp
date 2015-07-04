@@ -63,7 +63,7 @@
         </div>
 
         <style>
-            body{
+            #content{
   font:1.2em normal Arial,sans-serif;
   color:white;
   background-color: black;

@@ -49,23 +49,43 @@ public class FileUploadServlet extends HttpServlet {
 //        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
 
-        final String path = "C:\\Users\\Shy\\Documents\\NetBeansProjects\\sandstorm\\web\\songs";
+        final String pathSong = "C:\\Users\\Shy\\Documents\\NetBeansProjects\\sandstorm\\web\\songs";
+        final String pathPoster = "C:\\Users\\Shy\\Documents\\NetBeansProjects\\sandstorm\\web\\posters";
         final String songName = request.getParameter("songName");
         final String artist = request.getParameter("artist");
         final Part filePart = request.getPart("file");
-        String extension = "";
+        final Part posterPart = request.getPart("poster");
+        String extensionSong = "";
+        String extensionPoster = "";
         int i = getFileName(filePart).lastIndexOf('.');
         if (i > 0) {
-            extension = "." + getFileName(filePart).substring(i + 1);
+            extensionSong = "." + getFileName(filePart).substring(i + 1);
         }
-        final String fileName = artist + " - " + songName + extension;
+        final String fileName = artist + " - " + songName + extensionSong;
+        
+        
+        String posterName = "";
+        if ("".equals(getFileName(posterPart))) {
+         posterName = "../img/sandstorm_default.jpg"; 
+        } else {
+            int j = getFileName(posterPart).lastIndexOf('.');
 
-        OutputStream out = null;
+            if (j > 0) {
+                extensionPoster = "." + getFileName(posterPart).substring(j + 1);
+            }
+       posterName = artist + " - " + songName + extensionPoster;
+        }
+
+
+  
+        OutputStream outSong = null;
+        OutputStream outPoster = null;
         InputStream filecontent = null;
+        InputStream postercontent = null;
         final PrintWriter writer = response.getWriter();
 
         try {
-            out = new FileOutputStream(new File(path + File.separator
+            outSong = new FileOutputStream(new File(pathSong + File.separator
                     + fileName));
             filecontent = filePart.getInputStream();
 
@@ -73,8 +93,20 @@ public class FileUploadServlet extends HttpServlet {
             final byte[] bytes = new byte[1024];
 
             while ((read = filecontent.read(bytes)) != -1) {
-                out.write(bytes, 0, read);
+                outSong.write(bytes, 0, read);
             }
+
+            outPoster = new FileOutputStream(new File(pathPoster + File.separator
+                    + posterName));
+            postercontent = posterPart.getInputStream();
+
+            int readPoster = 0;
+            final byte[] bytesPoster = new byte[1024];
+
+            while ((readPoster = postercontent.read(bytesPoster)) != -1) {
+                outPoster.write(bytesPoster, 0, readPoster);
+            }
+
             Song song = new Song();
             song.setArtist(request.getParameter("artist"));
             song.setSongName(request.getParameter("songName"));
@@ -83,6 +115,7 @@ public class FileUploadServlet extends HttpServlet {
             song.setYear(Integer.parseInt(request.getParameter("songYear")));
             song.setFileLocation("songs/" + fileName);
             song.setName(request.getParameter("artist") + " - " + request.getParameter("songName"));
+            song.setPoster("posters/" + posterName);
             SongBean sb = new SongBean();
             sb.add(song);
             response.sendRedirect(request.getContextPath());
@@ -97,11 +130,17 @@ public class FileUploadServlet extends HttpServlet {
                     new Object[]{fne.getMessage()});
         } finally {
 
-            if (out != null) {
-                out.close();
+            if (outSong != null) {
+                outSong.close();
             }
             if (filecontent != null) {
                 filecontent.close();
+            }
+            if (outPoster != null) {
+                outPoster.close();
+            }
+            if (postercontent != null) {
+                postercontent.close();
             }
             if (writer != null) {
                 writer.close();

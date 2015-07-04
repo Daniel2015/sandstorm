@@ -33,7 +33,7 @@ public class SongBean {
         try {
             Class.forName(JDBC_DRIVER);
             con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-            pstmt = con.prepareStatement("INSERT INTO SONGSET (SONG_NAME, ARTIST_NAME, SONG_GENRE, SONG_ALBUM, SONG_YEAR, FILE_LOCATION, NAME) VALUES(?, ?, ?, ?, ?, ?, ?)");
+            pstmt = con.prepareStatement("INSERT INTO SONGSET (SONG_NAME, ARTIST_NAME, SONG_GENRE, SONG_ALBUM, SONG_YEAR, FILE_LOCATION, NAME, POSTER) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setString(1, s.getSongName());
             pstmt.setString(2, s.getArtist());
             pstmt.setString(3, s.getGenre());
@@ -41,6 +41,7 @@ public class SongBean {
             pstmt.setInt(5, s.getYear());
             pstmt.setString(6, s.getFileLocation());
             pstmt.setString(7, s.getName());
+            pstmt.setString(8, s.getPoster());
             pstmt.execute();
         } catch (SQLException | ClassNotFoundException ex) {
 
@@ -72,6 +73,7 @@ public class SongBean {
                 song.setTitle(rs.getString("SONG_NAME"));
                 song.setArtist(rs.getString("ARTIST_NAME"));
                 song.setMp3(rs.getString("FILE_LOCATION"));
+                song.setPoster(rs.getString("POSTER"));
                 list.add(song);
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -132,6 +134,8 @@ public class SongBean {
         private String title;
         private String artist;
         private String mp3;
+        private String m4v;
+        private String poster;
 
         public String getTitle() {
             return this.title;
@@ -144,6 +148,14 @@ public class SongBean {
         public String getArtist() {
             return this.artist;
         }
+        
+        public String getM4v(){
+            return this.m4v;
+        }
+        
+        public void setM4v(String m4v){
+            this.m4v=m4v;
+        }
 
         public void setArtist(String artist) {
             this.artist = artist;
@@ -154,7 +166,28 @@ public class SongBean {
         }
 
         public void setMp3(String mp3) {
-            this.mp3 = mp3;
+            String extensionSong = "";
+            int i = mp3.lastIndexOf('.');
+            if (i > 0) {
+
+                extensionSong = "." + mp3.substring(i + 1);
+                if (".mp3".equals(extensionSong)) {
+                    this.mp3 = mp3;
+                    this.m4v = null;
+                }
+                if (".m4v".equals(extensionSong) || ".mp4".equals(extensionSong)) {
+                    this.mp3 = null;
+                    this.m4v = mp3;
+                }
+            }
+        }
+
+        public String getPoster() {
+            return this.poster;
+        }
+
+        public void setPoster(String poster) {
+            this.poster = poster;
         }
 
     }

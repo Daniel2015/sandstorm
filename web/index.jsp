@@ -16,7 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sandstorm</title>
         <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-        <link type="text/css" href="css/jplayer.pink.flag.css" rel="stylesheet" />
+        <link type="text/css" href="css/jplayer.blue.monday.css" rel="stylesheet" />
         <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
         <link rel="import" href="bower_components/paper-elements/paper-elements.html">
         <link rel="import" href="bower_components/core-elements/core-elements.html">
@@ -77,7 +77,7 @@ Profile</paper-button> --%>
                     Integer userid = (Integer) request.getSession().getAttribute("user_id");
                     SongBean p = new SongBean();
                     List<songView> jsonPlaylist = p.getPlaylist(userid);
-                               String json = new Gson().toJson(jsonPlaylist);%> 
+                    String json = new Gson().toJson(jsonPlaylist);%> 
                 <script>
 
                     //<![CDATA[
@@ -86,42 +86,35 @@ Profile</paper-button> --%>
                         new jPlayerPlaylist({
                             jPlayer: "#jquery_jplayer_1",
                             cssSelectorAncestor: "#jp_container_1"
-                       },
-                    <%=json%>
-                        , {
-                        playlistOptions: {
-                            enableRemoveControls: true
                         },
-                            swfPath: "/js",
-                            supplied: "mp3",
-                            wmode: "window",
-                            useStateClassSkin: true,
-                            autoBlur: false,
-                            smoothPlayBar: true,
-                            keyEnabled: true
-                        });
+                       <%=json%>
+                                , {
+                                    playlistOptions: {
+                                        enableRemoveControls: true
+                                    },
+                                    swfPath: "/js",
+                                    supplied: "webmv, ogv, m4v, oga, mp3",
+                                    useStateClassSkin: true,
+                                    autoBlur: false,
+                                    smoothPlayBar: true,
+                                    keyEnabled: true,
+                                    audioFullScreen: true,
+                                    wmode:"window",
+                                    size: {
+                                        width: "100%"
+                                    }
+                                });
                     });
                     //]]>
 
                 </script>
-                <div id="jquery_jplayer_1" class="jp-jplayer"></div>
-                <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
+
+                <div id="jp_container_1" class="jp-video jp-video-270p" style="width:100%" role="application" aria-label="media player">
                     <div class="jp-type-playlist">
-                        <div class="jp-gui jp-interface">
-                            <div class="jp-volume-controls">
-                                <button class="jp-mute" role="button" tabindex="0">mute</button>
-                                <button class="jp-volume-max" role="button" tabindex="0">max volume</button>
-                                <div class="jp-volume-bar">
-                                    <div class="jp-volume-bar-value"></div>
-                                </div>
-                            </div>
-                            <div class="jp-controls-holder">
-                                <div class="jp-controls">
-                                    <button class="jp-previous" role="button" tabindex="0">previous</button>
-                                    <button class="jp-play" role="button" tabindex="0">play</button>
-                                    <button class="jp-stop" role="button" tabindex="0">stop</button>
-                                    <button class="jp-next" role="button" tabindex="0">next</button>
-                                </div>
+                        <div id="jquery_jplayer_1" class="jp-jplayer" style="line-height: 0px;"></div>
+                        <div class="jp-gui">
+
+                            <div class="jp-interface">
                                 <div class="jp-progress">
                                     <div class="jp-seek-bar">
                                         <div class="jp-play-bar"></div>
@@ -129,15 +122,34 @@ Profile</paper-button> --%>
                                 </div>
                                 <div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
                                 <div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
-                                <div class="jp-toggles">
-                                    <button class="jp-repeat" role="button" tabindex="0">repeat</button>
-                                    <button class="jp-shuffle" role="button" tabindex="0">shuffle</button>
+                                <div class="jp-details">
+                                    <div class="jp-title" aria-label="title">&nbsp;</div>
+                                </div>
+                                <div class="jp-controls-holder" style="width:100%;">
+                                    <div class="jp-volume-controls" style="left: 10px;">
+                                        <button class="jp-mute" role="button" tabindex="0">mute</button>
+                                        <button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+                                        <div class="jp-volume-bar">
+                                            <div class="jp-volume-bar-value"></div>
+                                        </div>
+                                    </div>
+                                    <div class="jp-controls" style="margin-top: 30px;margin-left: 60px;">
+                                        <button class="jp-previous" role="button" tabindex="0">previous</button>
+                                        <button class="jp-play" role="button" tabindex="0">play</button>
+                                        <button class="jp-next" role="button" tabindex="0">next</button>
+                                        <button class="jp-stop" role="button" tabindex="0">stop</button>
+                                    </div>
+                                    <div class="jp-toggles" style="left:150px;">
+                                        <button class="jp-repeat" role="button" tabindex="0">repeat</button>
+                                        <button class="jp-shuffle" role="button" tabindex="0">shuffle</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="jp-playlist">
                             <ul>
-                                <li>&nbsp;</li>
+                                <!-- The method Playlist.displayPlaylist() uses this unordered list -->
+                                <li></li>
                             </ul>
                         </div>
                         <div class="jp-no-solution">
@@ -179,9 +191,9 @@ Profile</paper-button> --%>
                     <paper-tabs selected="0" style="display: inline-block; width: 100%; margin:0 0px;">
                         <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/'" <% } %>>Home</paper-tab>
                         <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Music'" <% } %>>Music</paper-tab>
-                        <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Radio'" <% } %>>Radio </paper-tab> 
+                        <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Radio'" <% }%>>Radio </paper-tab> 
                             <%--                      <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Playlists'" <% }%>>Playlists</paper-tab> --%>
-                          <%--  <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Users'" <% }%>>Users</paper-tab>                              --%>
+                            <%--  <paper-tab <% if (session.getAttribute("username") == null) {%> onclick="location.href = '<%=request.getContextPath()%>/#/Login'" <% } else {%> onclick="location.href = '<%=request.getContextPath()%>/#/Users'" <% }%>>Users</paper-tab>                              --%>
                         <paper-tab onclick="location.href = '<%=request.getContextPath()%>/#/AboutUs'">About us</paper-tab>
                     </paper-tabs>
                     <paper-icon-button id="menu_toggle" icon="menu" core-drawer-toggle></paper-icon-button>

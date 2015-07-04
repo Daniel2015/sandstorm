@@ -66,6 +66,9 @@
                 <input type="text" id="songYear" name="songYear" is="core-input" maxlength="30" required>
 
             </paper-input-decorator>
+            <span class="btn btn-primary btn-file">
+                Poster(optional) <input  type="file" name="poster" id="poster" /> <br/>
+            </span>
             <input class="btn btn-success" style="width: 100%;" type="submit" value="Upload" name="upload" id="upload" />
         </form>
     </div>

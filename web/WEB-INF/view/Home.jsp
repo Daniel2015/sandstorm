@@ -6,7 +6,7 @@
 
 <style>
    
-body{ 
+#content{ 
     background:black  url("img/storm.jpg")no-repeat fixed center;
    
   }

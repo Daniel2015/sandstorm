@@ -18,6 +18,7 @@ public class Song {
     private int year;
     private String fileLocation;
     private String name;
+    private String poster;
     
     public int getSongId(){
         return this.song_id;
@@ -81,5 +82,13 @@ public class Song {
     
     public void setName(String name){
         this.name=name;
+    }
+    
+    public String getPoster(){
+        return this.poster;
+    }
+    
+    public void setPoster(String poster){
+        this.poster=poster;
     }
 }
